@@ -2,7 +2,7 @@ reset
 
 set ylabel 'time(nsec)'
 set xlabel 'number'
-set xtics 0,100
+set xtics 0,1000
 set style fill solid
 set title 'Linked list sorting performance'
 set term png enhanced font 'Verdana,10'

@@ -22,8 +22,8 @@ int main()
         tm[j] = 0;
         tbs[j] = 0;
     }
-//    for(j = 0; j < round; j++) {
-       for(i = 0; i < count; i++) {
+    for(j = 0; j < round; j++) {
+//    for(i = 0; i < count; i++) {
 //        struct __list *a = malloc(sizeof(struct __list));
 //        struct __list *b = malloc(sizeof(struct __list));
         struct __list *c = malloc(sizeof(struct __list));
@@ -59,20 +59,20 @@ int main()
             delete_list(b);*/
 //        for (int s = 0; s < )
             clock_gettime(CLOCK_MONOTONIC, &start);
-            c = big_s_sort(c, round, s);
+            c = big_s_sort(c, j + 1, 5000);
             clock_gettime(CLOCK_MONOTONIC, &stop);
             tbs[j] += stop.tv_nsec - start.tv_nsec;
             if (tbs[j] < 0 && j > 0)
                 tbs[j] = tbs[j - 1];
             delete_list(c); 
             printf("%dnd\n",j);
-//        }
+//    }
 //        ts[j] /= count;
 //        tm[j] /= count;
         tbs[j] /= count;
 //        fprintf(fp,"%d\t%lld\t%lld\t%lld\n", j+1, ts[j], tm[j], tbs[j]);
         fprintf(fp,"%d\t%lld\n", j+1, tbs[j]);
 //        printf("%d\t%ld\n", j+1, ts);
-//    }
+    }
     fclose(fp);
 }
