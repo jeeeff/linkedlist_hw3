@@ -154,3 +154,61 @@ list *merge_sort(list *start, int cut)
 
     return start;
 }
+
+list *big_s_sort(list *start, int cut, int s)
+{
+    if (!start || !start->addr)
+        return start;
+
+    list *left = start, *right = start->addr, *left_end = start;
+
+    int mid = cut / 2;
+    for (int i = 0; i < mid - 1; i++) {
+        list *tmp;
+        tmp = right;
+        right = XOR(right->addr, left_end);
+        left_end = tmp;
+    }
+    left_end->addr = XOR(right, left_end->addr);
+    right->addr = XOR(right->addr, left_end);
+    if(mid > s) {
+        left = big_s_sort(left, mid, s);
+        right = big_s_sort(right, cut - mid, s);
+    } else {
+        left = sort(left);
+        right = sort(right);
+    }
+
+    for (list *merge = NULL; left || right;) {
+        if (!right || (left && left->data < right->data)) {
+            list *next = left->addr;
+            if (next)
+                next->addr = XOR(left, next->addr);
+
+            if (!merge) {
+                start = merge = left;
+                merge->addr = NULL;
+            } else {
+                merge->addr = XOR(merge->addr,left);
+                left->addr = merge;
+                merge = left;
+            }
+            left = next;
+        } else {
+            list *next = right->addr;
+            if (next)
+                next->addr = XOR(right, next->addr);
+
+            if (!merge) {
+                start = merge = right;
+                merge->addr = NULL;
+            } else {
+                merge->addr = XOR(merge->addr,right);
+                right->addr = merge;
+                merge = right;
+            }
+            right = next;
+        }
+    }
+    return start;
+}

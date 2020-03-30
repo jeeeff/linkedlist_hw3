@@ -11,6 +11,6 @@ set key left top
 set format y
 
 plot [:][:]'time.txt' \
-	using 2:xtic(10) with linespoints linewidth 2 title 'Insertion sorting', \
-''  using 3:xtic(10) with linespoints linewidth 2 title 'Merge sort', \
-#''  using 4:xtic(10) with linespoints linewidth 2 title 'fib 3'\
+	using 2:xtic(10) with linespoints linewidth 2 title 'Big s sort', \
+#''  using 3:xtic(10) with linespoints linewidth 2 title 'Merge sort', \
+#''  using 4:xtic(10) with linespoints linewidth 2 title 'Big S sort'\
